@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 
 int main(){
-    int i, res, depth = 5;
+    int i, res, depth = 3;
     printf("grand parent pid: %d\n",getpid());
     for (i = 0; i < depth; i++){
         res = fork();
@@ -16,10 +16,6 @@ int main(){
             while(depth > 0){
                 depth = depth - 1;
                 res = fork();
-
-                if(depth == 0 && res != 0)
-                    res = fork();
-                    
                 if(res != 0){
                     wait(NULL);
                     exit(0);
